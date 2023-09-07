@@ -1,0 +1,51 @@
+name: Create Release Tags
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  publish:
+    name: build and deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build new images and push
+        run: |
+          make \
+            build-docker-images \
+            push-docker-images
+        env:
+          # webapp
+          PORT: 3000
+          NEXT_PUBLIC_TAG: ${{ github.ref }}
+          NEXT_PUBLIC_VERSION: ${{ github.ref }}
+          NEXT_PUBLIC_NAME: 'edenia_boilerplate'
+          NEXT_PUBLIC_TITLE: 'Full-Stack Boilerplate'
+          NEXT_PUBLIC_LOGO: 'https://raw.githubusercontent.com/edenia/.github/master/.github/workflows/images/edenia-logo.png'
+          NEXT_PUBLIC_FOOTER_LINKS: '[]'
+          NEXT_PUBLIC_UAL_APP_NAME: 'Full-Stack Boilerplate'
+          NEXT_PUBLIC_UAL_API_PROTOCOL: 'https'
+          NEXT_PUBLIC_UAL_API_HOST: 'jungle.edenia.cloud'
+          NEXT_PUBLIC_UAL_API_PORT: '443'
+          NEXT_PUBLIC_UAL_CHAIN_ID: '2a02a0053e5a8cf73a56ba0fda11e4d92e0238a4a2aa74fccf46d5a910746840'
+          NEXT_PUBLIC_HASURA_URL: ${{ secrets.NEXT_PUBLIC_HASURA_URL }}
+
+      - name: Create Release
+        id: create_release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: false

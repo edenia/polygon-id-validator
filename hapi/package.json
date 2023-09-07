@@ -1,0 +1,44 @@
+{
+  "name": "eosioboilerplate",
+  "version": "1.0.0",
+  "description": "Edenia Boilerplate WebApp",
+  "repository": "https://github.com/edenia/full-stack-boilerplate.git",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc && node dist/index.js",
+    "start:dev": "nodemon",
+    "prepare": "cd .. && husky install hapi/.husky"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint . --ext .ts",
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "@hapi/boom": "^10.0.0",
+    "@hapi/hapi": "^21.3.2",
+    "axios": "^1.5.0",
+    "eosjs": "^22.1.0",
+    "eosjs-api": "^7.0.4",
+    "graphql": "^16.7.1",
+    "graphql-request": "^6.1.0",
+    "joi": "^17.6.4",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.9",
+    "@typescript-eslint/eslint-plugin": "^6.6.0",
+    "@typescript-eslint/parser": "^6.6.0",
+    "eslint": "^8.26.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^14.0.1",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
