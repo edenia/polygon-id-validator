@@ -1,12 +1,5 @@
 version: "3.8"
 services:
-  wallet:
-    container_name: "wallet"
-    build: ./wallet
-    ports:
-      - "8888:8888"
-    volumes:
-      - ./tmp/wallet/:/opt/application/data/
   postgres:
     container_name: "postgres"
     image: postgres:13.11-alpine

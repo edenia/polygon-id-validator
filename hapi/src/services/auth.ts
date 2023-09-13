@@ -40,7 +40,7 @@ export const callback = async (req: Request) => {
   )
 
   const resolvers = {
-    'polygon:mumbai': ethStateResolver
+    [`polygon:${polygonConfig.polygonNetwork}`]: ethStateResolver
   }
 
   const schemaLoader: DocumentLoader = getDocumentLoader({
