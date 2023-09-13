@@ -32,15 +32,15 @@ jobs:
           PORT: 3000
           NEXT_PUBLIC_TAG: ${{ github.ref }}
           NEXT_PUBLIC_VERSION: ${{ github.ref }}
-          NEXT_PUBLIC_NAME: 'edenia_boilerplate'
-          NEXT_PUBLIC_TITLE: 'Full-Stack Boilerplate'
-          NEXT_PUBLIC_LOGO: 'https://raw.githubusercontent.com/edenia/.github/master/.github/workflows/images/edenia-logo.png'
-          NEXT_PUBLIC_FOOTER_LINKS: '[]'
-          NEXT_PUBLIC_UAL_APP_NAME: 'Full-Stack Boilerplate'
-          NEXT_PUBLIC_UAL_API_PROTOCOL: 'https'
-          NEXT_PUBLIC_UAL_API_HOST: 'jungle.edenia.cloud'
-          NEXT_PUBLIC_UAL_API_PORT: '443'
-          NEXT_PUBLIC_UAL_CHAIN_ID: '2a02a0053e5a8cf73a56ba0fda11e4d92e0238a4a2aa74fccf46d5a910746840'
+          NEXT_PUBLIC_NAME: "edenia_boilerplate"
+          NEXT_PUBLIC_TITLE: "Full-Stack Boilerplate"
+          NEXT_PUBLIC_LOGO: "https://raw.githubusercontent.com/edenia/.github/master/.github/workflows/images/edenia-logo.png"
+          NEXT_PUBLIC_FOOTER_LINKS: "[]"
+          NEXT_PUBLIC_UAL_APP_NAME: "Full-Stack Boilerplate"
+          NEXT_PUBLIC_UAL_API_PROTOCOL: "https"
+          NEXT_PUBLIC_UAL_API_HOST: "jungle.edenia.cloud"
+          NEXT_PUBLIC_UAL_API_PORT: "443"
+          NEXT_PUBLIC_UAL_CHAIN_ID: "2a02a0053e5a8cf73a56ba0fda11e4d92e0238a4a2aa74fccf46d5a910746840"
           NEXT_PUBLIC_HASURA_URL: ${{ secrets.NEXT_PUBLIC_HASURA_URL }}
 
       - name: Build kubernetes files
@@ -61,13 +61,16 @@ jobs:
           # hapi
           HAPI_SERVER_PORT: 9090
           HAPI_SERVER_ADDRESS: 0.0.0.0
-          HAPI_NETWORK_API: 'https://jungle.edenia.cloud'
-          HAPI_NETWORK_CHAIN_ID: '2a02a0053e5a8cf73a56ba0fda11e4d92e0238a4a2aa74fccf46d5a910746840'
-          HAPI_NETWORK_BASE_ACCOUNT: ${{ secrets.HAPI_NETWORK_BASE_ACCOUNT }}
-          HAPI_NETWORK_BASE_PASSWORD: ${{ secrets.HAPI_NETWORK_BASE_PASSWORD }}
-          HAPI_NETWORK_WALLET_URL: ${{ secrets.HAPI_NETWORK_WALLET }}
           HAPI_HASURA_URL: ${{ secrets.HAPI_HASURA_URL }}
           HAPI_HASURA_ADMIN_SECRET: ${{ secrets.HAPI_HASURA_ADMIN_SECRET }}
+          HAPI_HOST_DOMAIN: ${{ secrets.HAPI_HOST_DOMAIN }}
+          HAPI_POLYGON_NETWORK: "main"
+          HAPI_ISSUER_PUBLIC_KEY: ${{ secrets.HAPI_ISSUER_PUBLIC_KEY }}
+          HAPI_CONTRACT_ADDRESS: ${{ secrets.HAPI_CONTRACT_ADDRESS }}
+          HAPI_RPC_URL: ${{ secrets.HAPI_RPC_URL }}
+          HAPI_ALCHEMY_KEY: ${{ secrets.HAPI_ALCHEMY_KEY }}
+          HAPI_IPFS_NODE_URL: "https://ipfs.io"
+          HAPI_PROOF_REQUEST: ${{ secrets.HAPI_PROOF_REQUEST }}
           # hasura
           HASURA_GRAPHQL_ENABLE_CONSOLE: true
           HASURA_GRAPHQL_DATABASE_URL: ${{ secrets.HASURA_GRAPHQL_DATABASE_URL }}
