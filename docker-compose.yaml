@@ -20,7 +20,7 @@ services:
       POSTGRES_DB: "${POSTGRES_DB}"
   hapi:
     container_name: "hapi"
-    image: node:16.20.2
+    image: node:18.17.1
     ports:
       - "9090:9090"
     volumes:
@@ -32,13 +32,16 @@ services:
     environment:
       HAPI_SERVER_PORT: "${HAPI_SERVER_PORT}"
       HAPI_SERVER_ADDRESS: "${HAPI_SERVER_ADDRESS}"
-      HAPI_NETWORK_API: "${HAPI_NETWORK_API}"
-      HAPI_NETWORK_CHAIN_ID: "${HAPI_NETWORK_CHAIN_ID}"
-      HAPI_NETWORK_BASE_ACCOUNT: "${HAPI_NETWORK_BASE_ACCOUNT}"
-      HAPI_NETWORK_BASE_PASSWORD: "${HAPI_NETWORK_BASE_PASSWORD}"
-      HAPI_NETWORK_WALLET_URL: "${HAPI_NETWORK_WALLET_URL}"
       HAPI_HASURA_URL: "${HAPI_HASURA_URL}"
       HAPI_HASURA_ADMIN_SECRET: "${HAPI_HASURA_ADMIN_SECRET}"
+      HAPI_HOST_DOMAIN: "${HAPI_HOST_DOMAIN}"
+      HAPI_POLYGON_NETWORK: "${HAPI_POLYGON_NETWORK}"
+      HAPI_ISSUER_PUBLIC_KEY: "${HAPI_ISSUER_PUBLIC_KEY}"
+      HAPI_CONTRACT_ADDRESS: "${HAPI_CONTRACT_ADDRESS}"
+      HAPI_RPC_URL: "${HAPI_RPC_URL}"
+      HAPI_ALCHEMY_KEY: "${HAPI_ALCHEMY_KEY}"
+      HAPI_IPFS_NODE_URL: "${HAPI_IPFS_NODE_URL}"
+      HAPI_PROOF_REQUEST: "${HAPI_PROOF_REQUEST}"
   hasura:
     container_name: "hasura"
     image: hasura/graphql-engine:v2.33.1.cli-migrations-v3
@@ -58,12 +61,12 @@ services:
       HASURA_GRAPHQL_ACTION_BASE_URL: "${HASURA_GRAPHQL_ACTION_BASE_URL}"
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       # Local Development Configurations It is recommended to disable this in production
-      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_DEV_MODE: "false"
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       HASURA_GRAPHQL_ENABLE_LOGGING: "true"
       # disabled security for local development
-      # HASURA_GRAPHQL_ADMIN_SECRET: "${HASURA_GRAPHQL_ADMIN_SECRET}"
-      # HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "${HASURA_GRAPHQL_UNAUTHORIZED_ROLE}"
+      HASURA_GRAPHQL_ADMIN_SECRET: "${HASURA_GRAPHQL_ADMIN_SECRET}"
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "${HASURA_GRAPHQL_UNAUTHORIZED_ROLE}"
   webapp:
     container_name: "webapp"
     image: node:16.14.0-alpine

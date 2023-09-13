@@ -17,15 +17,20 @@
     ]
   },
   "dependencies": {
+    "@0xpolygonid/js-sdk": "^1.1.0",
     "@hapi/boom": "^10.0.0",
     "@hapi/hapi": "^21.3.2",
+    "@iden3/js-iden3-auth": "^1.0.0",
+    "@types/uuid": "^9.0.3",
     "axios": "^1.5.0",
     "eosjs": "^22.1.0",
     "eosjs-api": "^7.0.4",
     "graphql": "^16.7.1",
     "graphql-request": "^6.1.0",
     "joi": "^17.6.4",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "2",
+    "raw-body": "^2.5.2",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.5.9",

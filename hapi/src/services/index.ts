@@ -1,1 +1,1 @@
-export default {}
+export * as authService from './auth'

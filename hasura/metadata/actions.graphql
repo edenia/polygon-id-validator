@@ -1,0 +1,9 @@
+type Mutation {
+  v1_generate_auth_request: success_output
+}
+
+type success_output {
+  res: Boolean!
+  data: jsonb!
+}
+

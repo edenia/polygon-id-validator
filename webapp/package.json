@@ -19,11 +19,13 @@
     "start:local": "env-cmd -f ../.env next dev"
   },
   "dependencies": {
+    "@0xpolygonid/js-sdk": "^1.1.0",
     "@apollo/client": "^3.8.0-rc.1",
     "@apollo/experimental-nextjs-app-support": "^0.0.0-commit-7dad495",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@google-cloud/recaptcha-enterprise": "^2.4.0",
+    "@iden3/js-iden3-auth": "^1.0.0",
     "@mui/icons-material": "^5.11.11",
     "@mui/lab": "^5.0.0-alpha.124",
     "@mui/material": "^5.11.15",
@@ -42,6 +44,7 @@
     "next-intl": "^2.19.1",
     "next-seo": "^4.28.1",
     "node-fetch": "^3.0.0",
+    "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-google-recaptcha-v3": "^1.9.7",

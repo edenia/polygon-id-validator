@@ -1,33 +1,54 @@
 'use client'
 
-import { useSuspenseQuery } from '@apollo/experimental-nextjs-app-support/ssr'
-import { useTranslations } from 'next-intl'
-import { gql } from '@apollo/client'
+import { gql, useMutation } from '@apollo/client'
+import { AuthorizationRequestMessage } from '@0xpolygonid/js-sdk/dist/types/iden3comm/types/protocol/auth'
+import { QRCodeCanvas } from 'qrcode.react'
+import { useEffect } from 'react'
 
-import { useSharedState } from './context'
-
-const query = gql`
-  query Now {
-    no_queries_available
+const mutation = gql`
+  mutation v1_generate_auth_request {
+    v1_generate_auth_request {
+      data
+      res
+    }
   }
 `
 
-type testQuery = {
-  no_queries_available: string
+type AuthRequest = {
+  v1_generate_auth_request: {
+    data: AuthorizationRequestMessage
+    res: boolean
+  }
 }
 
 const Home: React.FC = () => {
-  const t = useTranslations('IndexPage')
-  const { data } = useSuspenseQuery<testQuery>(query)
-  const [state] = useSharedState()
+  const [generateRequest, { data, loading /* error */ }] =
+    useMutation<AuthRequest>(mutation)
+
+  useEffect(() => {
+    generateRequest()
+  }, [generateRequest])
 
   return (
-    <div style={{ marginTop: 150 }} data-testid='test-home'>
-      <h1>{t('title')}</h1>
-      <h4>Test query</h4>
-      <span>{data?.no_queries_available || ''}</span>
-      <h4>Test State</h4>
-      <span>{state?.useDarkMode ? 'Dark Mode On' : 'Dark Mode On'}</span>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '96vh'
+      }}
+      data-testid='test-home'
+    >
+      <h1>QR Code</h1>
+      {!loading && data ? (
+        <QRCodeCanvas
+          value={JSON.stringify(data?.v1_generate_auth_request.data)}
+          size={256}
+        />
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   )
 }

@@ -9,7 +9,7 @@ K8S_FILES := $(shell find ./kubernetes -name '*.yaml' | sed 's:./kubernetes/::g'
 
 run:
 	make -B postgres
-	make -B wallet
+	# make -B wallet
 	make -B hapi
 	make -B hasura
 	make -B -j 3 hapi-logs hasura-cli webapp
