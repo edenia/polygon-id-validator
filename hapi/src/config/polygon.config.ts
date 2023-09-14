@@ -14,17 +14,4 @@ if (!process.env.HAPI_PROOF_REQUEST) {
   throw new Error('Missing required proof request or wrong format')
 }
 
-// TODO: import it from .env
-export const proofRequest = {
-  circuitId: 'credentialAtomicQuerySigV2',
-  id: 1694556023,
-  query: {
-    allowedIssuers: [
-      'did:polygonid:polygon:mumbai:2qNYpa3KcroDtAG8hmyNF5uesQndakeEgWaxCeVRJ6'
-    ],
-    context:
-      'https://raw.githubusercontent.com/edenia/issuer-node/main/json_test/CourseCertificateAttendance.json-ld',
-    credentialSubject: { 'course-name': { $eq: 'Blockchain' } },
-    type: 'course-certificate'
-  }
-}
+export const proofRequest = JSON.parse(process.env.HAPI_PROOF_REQUEST)
