@@ -65,5 +65,9 @@ export const callback = async (req: Request) => {
   const response = await verifier.fullVerify(tokenStr, request.auth, opts)
   const message = `User with ID: ${response.from} succesfully authenticated`
 
+  request.status = requestModel.interfaces.Status.success
+
+  await requestModel.queries.update(request)
+
   return message
 }

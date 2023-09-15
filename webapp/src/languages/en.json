@@ -27,11 +27,11 @@
   },
   "Metadata": {
     "/": {
-      "Title": "Website boilerplate project",
+      "Title": "Polygon ID demo",
       "Description": "website description project"
     },
     "/second-page": {
-      "Title": "Website boilerplate project second page",
+      "Title": "Polygon ID demo second page",
       "Description": "website description project second page"
     }
   }

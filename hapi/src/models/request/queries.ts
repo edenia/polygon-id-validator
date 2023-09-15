@@ -41,15 +41,14 @@ export const update = async (input: Request) => {
       ) {
         session_id
         auth
+        status
       }
     }
   `
 
   await coreUtil.hasura.default.request(mutation, {
     session_id: input.session_id,
-    payload: {
-      auth: input.auth
-    }
+    payload: input
   })
 }
 
@@ -62,6 +61,7 @@ export const getState = async () => {
       ) {
         session_id
         auth
+        status
       }
     }
   `
@@ -80,6 +80,7 @@ export const get = async (sessionId: string) => {
       request(where: { session_id: { _eq: $session_id } }, limit: 1) {
         session_id
         auth
+        status
       }
     }
   `

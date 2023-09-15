@@ -40,7 +40,7 @@ const Home: React.FC = () => {
       }}
       data-testid='test-home'
     >
-      <h1>QR Code</h1>
+      <h1>Scan this QR code to get your verifiable credential validated</h1>
       {!loading && data ? (
         <QRCodeCanvas
           value={JSON.stringify(data?.v1_generate_auth_request.data)}
