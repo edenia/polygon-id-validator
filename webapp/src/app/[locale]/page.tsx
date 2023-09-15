@@ -1,9 +1,11 @@
 'use client'
 
-import { gql, useMutation, useSubscription } from '@apollo/client'
+import { gql, useMutation, useLazyQuery } from '@apollo/client'
+import { useLocale, useTranslations } from 'next-intl'
 import { AuthorizationRequestMessage } from '@0xpolygonid/js-sdk/dist/types/iden3comm/types/protocol/auth'
 import { QRCodeCanvas } from 'qrcode.react'
 import { useEffect } from 'react'
+import Button from '@mui/material/Button'
 
 const mutation = gql`
   mutation v1_generate_auth_request {
@@ -14,8 +16,8 @@ const mutation = gql`
   }
 `
 
-const subscription = gql`
-  subscription on_request_updated($session_id: uuid!) {
+const lazyQuery = gql`
+  query on_request_updated($session_id: uuid!) {
     request(where: { session_id: { _eq: $session_id } }) {
       session_id
       status
@@ -37,18 +39,33 @@ interface RequestResolvedProps {
 const RequestResolvedComponent: React.FC<RequestResolvedProps> = ({
   session_id
 }) => {
-  const { data, loading, error } = useSubscription(subscription, {
-    variables: { session_id }
+  const locale = useLocale()
+  const t = useTranslations('IndexPage')
+  const [loadState, { loading, data }] = useLazyQuery(lazyQuery, {
+    variables: { session_id },
+    fetchPolicy: 'network-only'
   })
 
-  useEffect(() => {
-    console.log(data)
-  }, [data])
+  const handleClick = async () => {
+    await loadState()
+  }
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error :(</p>
+  return (
+    <div>
+      <p>Request status: {data?.request[0].status || 'pending'}</p>
 
-  return <p>Request status: {data.request[0].status}</p>
+      {!loading && (!data || data?.request[0].status === 'pending') ? (
+        <Button
+          id='basic-button'
+          variant='contained'
+          onClick={handleClick}
+          style={{ marginTop: '64px' }}
+        >
+          {t('load-button', { locale })}
+        </Button>
+      ) : null}
+    </div>
+  )
 }
 
 const Home: React.FC = () => {

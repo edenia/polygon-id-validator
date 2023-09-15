@@ -21,7 +21,7 @@ const HeaderDesktopView: React.FC<HeaderDesktopProps> = ({ asPath }) => {
     <div className={(classes.drawerContainer, classes.drawerShowDesktop)}>
       <div className={classes.logoAndMenu}>
         <Link href='/' aria-label='logo-header'>
-          <Logo width={200} height={42} />
+          <Logo width={150} height={42} />
         </Link>
         <div className={classes.topBarMenu}>{/* here map for routers */}</div>
       </div>
