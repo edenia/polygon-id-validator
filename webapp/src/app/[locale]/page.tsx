@@ -72,6 +72,8 @@ const RequestResolvedComponent: React.FC<RequestResolvedProps> = ({
 }
 
 const Home: React.FC = () => {
+  const locale = useLocale()
+  const t = useTranslations('IndexPage')
   const [generateRequest, { data, loading /* error */ }] =
     useMutation<AuthRequest>(mutation)
 
@@ -90,7 +92,7 @@ const Home: React.FC = () => {
       }}
       data-testid='test-home'
     >
-      <h1>Scan this QR code to get your verifiable credential validated</h1>
+      <h1>{t('header', { locale })} </h1>
       {!loading && data ? (
         <>
           <QRCodeCanvas
