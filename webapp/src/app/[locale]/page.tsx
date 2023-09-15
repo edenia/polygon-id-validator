@@ -52,7 +52,10 @@ const RequestResolvedComponent: React.FC<RequestResolvedProps> = ({
 
   return (
     <div>
-      <p>Request status: {data?.request[0].status || 'pending'}</p>
+      <p>
+        {t('request-status', { locale })}:{' '}
+        {t(data?.request[0].status || 'pending', { locale })}
+      </p>
 
       {!loading && (!data || data?.request[0].status === 'pending') ? (
         <Button
