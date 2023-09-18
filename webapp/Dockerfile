@@ -1,4 +1,4 @@
-FROM node:16.14.0-alpine  as build-stage
+FROM node:current-alpine  as build-stage
 
 ARG next_public_tag
 ARG next_public_name
@@ -25,6 +25,8 @@ ENV NEXT_PUBLIC_UAL_CHAIN_ID $next_public_ual_chain_id
 ENV NEXT_PUBLIC_HASURA_URL $next_public_hasura_url
 
 WORKDIR /usr/src/app
+
+RUN apk add --no-cache git
 
 COPY package.json .
 

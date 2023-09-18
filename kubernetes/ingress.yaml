@@ -61,3 +61,35 @@ spec:
           port: 8080
   tls:
     certResolver: myresolver
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: hapi-http
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`${INGRESS_HAPI_HOST}`)
+      services:
+        - kind: Service
+          name: hapi
+          port: 9090
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: hapi-https
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`${INGRESS_HAPI_HOST}`)
+      services:
+        - kind: Service
+          name: hapi
+          port: 9090
+  tls:
+    certResolver: myresolver
