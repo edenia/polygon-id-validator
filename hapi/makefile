@@ -19,6 +19,7 @@ build-docker: ##@devops Build the docker image
 build-docker: ./Dockerfile
 	@docker pull $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI):$(VERSION) || true
 	@docker build \
+		--target release \
 		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI):$(VERSION) \
 		-t $(DOCKER_REGISTRY)/$(IMAGE_NAME_HAPI):$(LATEST_TAG) \
 		.
