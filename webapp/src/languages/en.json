@@ -6,7 +6,8 @@
     "load-button": "Check proof",
     "request-status": "Request status",
     "pending": "pending",
-    "success": "success"
+    "success": "success",
+    "gen-new-proof": "Generate new proof"
   },
   "SecondPage": {
     "title": "Seecond Page",

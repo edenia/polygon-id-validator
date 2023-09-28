@@ -6,7 +6,8 @@
     "load-button": "Validar prueba",
     "request-status": "Estado de la solicitud",
     "pending": "pendiente",
-    "success": "exitoso"
+    "success": "exitoso",
+    "gen-new-proof": "Generar nueva prueba"
   },
   "SecondPage": {
     "title": "Página Secundaria",
