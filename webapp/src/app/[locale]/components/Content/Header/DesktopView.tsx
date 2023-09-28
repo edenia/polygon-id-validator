@@ -26,18 +26,7 @@ const HeaderDesktopView: React.FC<HeaderDesktopProps> = ({ asPath }) => {
         <div className={classes.topBarMenu}>{/* here map for routers */}</div>
       </div>
       <div className={classes.languageBox}>
-        <div className={classes.contactUs}>
-          <Link href='/second-page'>
-            <Typography
-              variant='body1'
-              className={clsx('text', {
-                ['linkActive']: asPath === '/contact'
-              })}
-            >
-              {t('secondPage')}
-            </Typography>
-          </Link>
-        </div>
+        <div className={classes.contactUs} />
         <LanguageSelector />
       </div>
     </div>

@@ -34,10 +34,12 @@ type AuthRequest = {
 
 interface RequestResolvedProps {
   session_id: string
+  onGenerateQRCode: () => void
 }
 
 const RequestResolvedComponent: React.FC<RequestResolvedProps> = ({
-  session_id
+  session_id,
+  onGenerateQRCode
 }) => {
   const locale = useLocale()
   const t = useTranslations('IndexPage')
@@ -66,7 +68,16 @@ const RequestResolvedComponent: React.FC<RequestResolvedProps> = ({
         >
           {t('load-button', { locale })}
         </Button>
-      ) : null}
+      ) : (
+        <Button
+          id='basic-button'
+          variant='contained'
+          onClick={onGenerateQRCode}
+          style={{ marginTop: '64px' }}
+        >
+          {t('gen-new-proof', { locale })}
+        </Button>
+      )}
     </div>
   )
 }
@@ -101,6 +112,7 @@ const Home: React.FC = () => {
           />
           <RequestResolvedComponent
             session_id={data?.v1_generate_auth_request.data.id}
+            onGenerateQRCode={generateRequest}
           />
         </>
       ) : (
