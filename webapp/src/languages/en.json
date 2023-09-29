@@ -1,17 +1,22 @@
 {
+  "HomePage": {
+    "title": "Credential Verifier",
+    "gen-new-proof": "Generate proof"
+  },
   "IndexPage": {
     "title": "next-intl example",
     "description": "This is a basic example that demonstrates the usage of <code>next-intl</code> with the Next.js App Router. Try changing the locale in the top right corner and see how the content changes.",
     "header": "Scan this QR code to get your verifiable credential validated",
     "load-button": "Check proof",
-    "request-status": "Request status",
+    "request-status": "Proof status",
     "pending": "pending",
     "success": "success",
     "gen-new-proof": "Generate new proof"
   },
-  "SecondPage": {
-    "title": "Seecond Page",
-    "description": "The routing is internationalized too. If you're using the default language English, you'll see /second-page in the browser address bar on this page. If you change the locale to German, the URL is prefixed with the locale (/es/second-page)."
+  "CredentialPage": {
+    "title": "Credential Page",
+    "description": "The routing is internationalized too. If you're using the default language English, you'll see /second-page in the browser address bar on this page. If you change the locale to German, the URL is prefixed with the locale (/es/second-page).",
+    "no-data": "No data"
   },
   "Error": {
     "title": "Something went wrong!",
@@ -29,15 +34,15 @@
     "locale": "{locale, select, es {Spanish} en {English} other {Unknown}}"
   },
   "Footer": {
-    "copyright": "Website boilerplate - Sistemas Edenia Internacional S.A. | All rights reserved"
+    "copyright": "Credential Verifier - Sistemas Edenia Internacional S.A. | All rights reserved"
   },
   "Metadata": {
     "/": {
       "Title": "Polygon ID demo",
       "Description": "website description project"
     },
-    "/second-page": {
-      "Title": "Polygon ID demo second page",
+    "/credential": {
+      "Title": "Polygon ID demo",
       "Description": "website description project second page"
     }
   }

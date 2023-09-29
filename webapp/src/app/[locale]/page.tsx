@@ -1,96 +1,12 @@
 'use client'
 
-import { gql, useMutation, useLazyQuery } from '@apollo/client'
+import Link from 'next-intl/link'
 import { useLocale, useTranslations } from 'next-intl'
-import { AuthorizationRequestMessage } from '@0xpolygonid/js-sdk/dist/types/iden3comm/types/protocol/auth'
-import { QRCodeCanvas } from 'qrcode.react'
-import { useEffect } from 'react'
-import Button from '@mui/material/Button'
+import { Box, Button } from '@mui/material'
 
-const mutation = gql`
-  mutation v1_generate_auth_request {
-    v1_generate_auth_request {
-      data
-      res
-    }
-  }
-`
-
-const lazyQuery = gql`
-  query on_request_updated($session_id: uuid!) {
-    request(where: { session_id: { _eq: $session_id } }) {
-      session_id
-      status
-    }
-  }
-`
-
-type AuthRequest = {
-  v1_generate_auth_request: {
-    data: AuthorizationRequestMessage
-    res: boolean
-  }
-}
-
-interface RequestResolvedProps {
-  session_id: string
-  onGenerateQRCode: () => void
-}
-
-const RequestResolvedComponent: React.FC<RequestResolvedProps> = ({
-  session_id,
-  onGenerateQRCode
-}) => {
+const Home = (): JSX.Element => {
   const locale = useLocale()
-  const t = useTranslations('IndexPage')
-  const [loadState, { loading, data }] = useLazyQuery(lazyQuery, {
-    variables: { session_id },
-    fetchPolicy: 'network-only'
-  })
-
-  const handleClick = async () => {
-    await loadState()
-  }
-
-  return (
-    <div>
-      <p>
-        {t('request-status', { locale })}:{' '}
-        {t(data?.request[0].status || 'pending', { locale })}
-      </p>
-
-      {!loading && (!data || data?.request[0].status === 'pending') ? (
-        <Button
-          id='basic-button'
-          variant='contained'
-          onClick={handleClick}
-          style={{ marginTop: '64px' }}
-        >
-          {t('load-button', { locale })}
-        </Button>
-      ) : (
-        <Button
-          id='basic-button'
-          variant='contained'
-          onClick={onGenerateQRCode}
-          style={{ marginTop: '64px' }}
-        >
-          {t('gen-new-proof', { locale })}
-        </Button>
-      )}
-    </div>
-  )
-}
-
-const Home: React.FC = () => {
-  const locale = useLocale()
-  const t = useTranslations('IndexPage')
-  const [generateRequest, { data, loading /* error */ }] =
-    useMutation<AuthRequest>(mutation)
-
-  useEffect(() => {
-    generateRequest()
-  }, [generateRequest])
+  const t = useTranslations('HomePage')
 
   return (
     <div
@@ -103,21 +19,40 @@ const Home: React.FC = () => {
       }}
       data-testid='test-home'
     >
-      <h1>{t('header', { locale })} </h1>
-      {!loading && data ? (
-        <>
-          <QRCodeCanvas
-            value={JSON.stringify(data?.v1_generate_auth_request.data)}
-            size={256}
-          />
-          <RequestResolvedComponent
-            session_id={data?.v1_generate_auth_request.data.id}
-            onGenerateQRCode={generateRequest}
-          />
-        </>
-      ) : (
-        <p>Loading...</p>
-      )}
+      <Box
+        sx={{
+          width: '45%',
+          height: '30%',
+          backgroundColor: '#f5f5f5',
+          borderRadius: '16px',
+          boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+          textAlign: 'center'
+        }}
+      >
+        <h1 style={{ color: '#333', marginLeft: '16px' }}>
+          {t('title', { locale })}{' '}
+        </h1>
+
+        <Link href='/credential'>
+          <Button
+            id='basic-button'
+            variant='contained'
+            style={{
+              marginTop: '60px',
+              color: 'white',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '200px',
+              position: 'absolute',
+              left: '50%',
+              transform: 'translateX(-50%)'
+            }}
+          >
+            {t('gen-new-proof', { locale })}
+          </Button>
+        </Link>
+      </Box>
     </div>
   )
 }
