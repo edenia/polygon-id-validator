@@ -46,7 +46,7 @@ const RequestResolvedComponent = ({ session_id }: RequestResolvedProps) => {
   const locale = useLocale()
   const t = useTranslations('IndexPage')
   const [snackbarOpen, setSnackbarOpen] = React.useState(false)
-  const [loadState, { loading, data }] = useLazyQuery(lazyQuery, {
+  const [loadState, { data }] = useLazyQuery(lazyQuery, {
     variables: { session_id },
     fetchPolicy: 'network-only'
   })
