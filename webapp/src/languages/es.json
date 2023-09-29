@@ -1,4 +1,8 @@
 {
+  "HomePage": {
+    "title": "Verificador de Credenciales",
+    "gen-new-proof": "Generar prueba"
+  },
   "IndexPage": {
     "title": "next-intl ejemplo",
     "description": "This is a basic example that demonstrates the usage of <code>next-intl</code> with the Next.js App Router. Try changing the locale in the top right corner and see how the content changes.",
@@ -9,9 +13,10 @@
     "success": "exitoso",
     "gen-new-proof": "Generar nueva prueba"
   },
-  "SecondPage": {
+  "CredentialPage": {
     "title": "Página Secundaria",
-    "description": "La ruta también está internacionalizada. Si está utilizando el idioma predeterminado inglés, verá /second-page en la barra de direcciones del navegador en esta página. Si cambia la configuración regional a español, la URL tiene el prefijo de la configuración regional (/es/second-page)."
+    "description": "La ruta también está internacionalizada. Si está utilizando el idioma predeterminado inglés, verá /second-page en la barra de direcciones del navegador en esta página. Si cambia la configuración regional a español, la URL tiene el prefijo de la configuración regional (/es/second-page).",
+    "no-data": "No hay datos"
   },
   "Error": {
     "title": "Something went wrong!",
@@ -33,11 +38,11 @@
   },
   "Metadata": {
     "/es": {
-      "Title": "Proyecto de Inicio",
+      "Title": "Polygon ID demo",
       "Description": "Este proyecto es un seed"
     },
-    "/es/second-page": {
-      "Title": "Proyecto de Inicio second page",
+    "/es/credential": {
+      "Title": "Polygon ID demo",
       "Description": "website description project second page"
     }
   }

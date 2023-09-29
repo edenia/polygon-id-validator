@@ -116,18 +116,18 @@ const components: ThemeOptions['components'] = {
     styleOverrides: {
       root: {
         '&.MuiButton-contained': {
-          minWidth: 270,
-          fontSize: 18,
-          borderRadius: 18,
+          // minWidth: 270,
+          fontSize: 14,
+          // borderRadius: 18,
           fontWeight: 'bold',
           fontFamily: 'Roboto',
-          textTransform: 'capitalize',
-          padding: '12px 48px',
-          '@media (max-width: 600px)': {
-            height: 50,
-            minWidth: 180,
-            padding: '12px 20px'
-          }
+          textTransform: 'capitalize'
+          // padding: '12px 48px'
+          // '@media (max-width: 600px)': {
+          //   height: 50,
+          //   minWidth: 180,
+          //   padding: '12px 20px'
+          // }
         }
       }
     }

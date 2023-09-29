@@ -3,16 +3,14 @@
 'use client'
 
 import { useState, useCallback, useEffect } from 'react'
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { createTranslator, NextIntlClientProvider } from 'next-intl'
-import { LocalizationProvider } from '@mui/x-date-pickers'
 import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import { usePathname } from 'next/navigation'
 import { notFound } from 'next/navigation'
 import { DefaultSeo } from 'next-seo'
 
-import { seoConfig, themeConfig, i18nConfig } from '../../config'
+import { seoConfig, themeConfig } from '../../config'
 import MainContent from './components/Content'
 import { ApolloWrapper } from './lib/apollo-wrapper'
 import { SharedStateProvider } from './context'
@@ -37,10 +35,6 @@ async function getLanguages(locale: string) {
   }
 }
 
-export async function generateStaticParams() {
-  return ['en', 'de'].map(locale => ({ locale }))
-}
-
 export default function RootLayout({
   children,
   params: { locale = 'en' }
@@ -49,8 +43,8 @@ export default function RootLayout({
 
   const pathname = usePathname()
   const [metadata, setMetadata] = useState({
-    title: 'website boilerplate',
-    description: 'website boilerplate page',
+    title: 'website credential verifier',
+    description: 'credential verifier page',
     currentRoute: ''
   })
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false)
@@ -120,26 +114,19 @@ export default function RootLayout({
                 isDarkTheme ? themeConfig.darkTheme : themeConfig.lightTheme
               }
             >
-              <LocalizationProvider
-                dateAdapter={AdapterDateFns}
-                adapterLocale={
-                  i18nConfig?.dateFnsLocaleMap?.[locale as keyof Languages]
-                }
-              >
-                {languages ? (
-                  <NextIntlClientProvider locale={locale} messages={languages}>
-                    <CssBaseline />
-                    <MainContent
-                      isDarkTheme={isDarkTheme}
-                      toggleThemeType={toggleThemeType}
-                    >
-                      {children}
-                    </MainContent>
-                  </NextIntlClientProvider>
-                ) : (
-                  <span>loading...</span>
-                )}
-              </LocalizationProvider>
+              {languages ? (
+                <NextIntlClientProvider locale={locale} messages={languages}>
+                  <CssBaseline />
+                  <MainContent
+                    isDarkTheme={isDarkTheme}
+                    toggleThemeType={toggleThemeType}
+                  >
+                    {children}
+                  </MainContent>
+                </NextIntlClientProvider>
+              ) : (
+                <span>loading...</span>
+              )}
             </ThemeProvider>
           </SharedStateProvider>
         </ApolloWrapper>

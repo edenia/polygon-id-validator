@@ -5,8 +5,11 @@ select_permissions:
   - role: guest
     permission:
       columns:
-        - status
         - auth
+        - created_at
         - session_id
+        - status
+        - updated_at
       filter: {}
+      allow_aggregations: true
     comment: ""
