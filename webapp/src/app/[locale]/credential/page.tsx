@@ -5,12 +5,13 @@ import { useLocale, useTranslations } from 'next-intl'
 import { gql, useMutation, useLazyQuery } from '@apollo/client'
 import { AuthorizationRequestMessage } from '@0xpolygonid/js-sdk/dist/types/iden3comm/types/protocol/auth'
 import { QRCodeCanvas } from 'qrcode.react'
-import { Button } from '@mui/material'
+import { Button, Alert } from '@mui/material'
 import { useEffect } from 'react'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import ReplayIcon from '@mui/icons-material/Replay'
 import TableCredentialComponent from '../components/TableCredential'
+import Snackbar from '@mui/material/Snackbar'
 
 const mutation = gql`
   mutation v1_generate_auth_request {
@@ -44,6 +45,7 @@ interface RequestResolvedProps {
 const RequestResolvedComponent = ({ session_id }: RequestResolvedProps) => {
   const locale = useLocale()
   const t = useTranslations('IndexPage')
+  const [snackbarOpen, setSnackbarOpen] = React.useState(false)
   const [loadState, { loading, data }] = useLazyQuery(lazyQuery, {
     variables: { session_id },
     fetchPolicy: 'network-only'
@@ -51,33 +53,56 @@ const RequestResolvedComponent = ({ session_id }: RequestResolvedProps) => {
 
   const handleClick = async () => {
     await loadState()
+
+    setSnackbarOpen(true)
+  }
+
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === 'clickaway') {
+      return
+    }
+
+    setSnackbarOpen(false)
   }
 
   return (
     <div>
-      <p style={{ fontSize: 12 }}>
-        {t('request-status', { locale })}:{' '}
-        {t(data?.request[0].status || 'pending', { locale })}
-      </p>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={5000}
+        onClose={handleClose}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={
+            data?.request[0].status == 'success' ? 'success' : 'warning'
+          }
+          sx={{ width: '100%' }}
+        >
+          {t('request-status', { locale })}:{' '}
+          {t(data?.request[0].status || 'pending', { locale })}
+        </Alert>
+      </Snackbar>
 
       <div style={{ marginTop: '24px' }}>
-        {!loading && (!data || data?.request[0].status === 'pending') ? (
-          <Button
-            id='basic-button'
-            variant='contained'
-            size='small'
-            onClick={handleClick}
-          >
-            {t('load-button', { locale })}
-          </Button>
-        ) : null}
+        <Button
+          id='basic-button'
+          variant='contained'
+          size='small'
+          onClick={handleClick}
+        >
+          {t('load-button', { locale })}
+        </Button>
       </div>
     </div>
   )
 }
 
-const SecondPage = (): JSX.Element => {
-  const [generateRequest, { data, loading /* error */ }] =
+const CredentialPage = (): JSX.Element => {
+  const [generateRequest, { data, loading }] =
     useMutation<AuthRequest>(mutation)
 
   const handleReload = () => {
@@ -89,7 +114,7 @@ const SecondPage = (): JSX.Element => {
   }, [generateRequest])
 
   return (
-    <div style={{ display: 'flex', marginTop: 150 }}>
+    <div style={{ display: 'flex', marginTop: 150, height: '90vh' }}>
       <div
         style={{
           flex: 7,
@@ -97,7 +122,7 @@ const SecondPage = (): JSX.Element => {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          height: '100%'
+          height: '300px'
         }}
       >
         {!loading && data ? (
@@ -150,4 +175,4 @@ const SecondPage = (): JSX.Element => {
   )
 }
 
-export default SecondPage
+export default CredentialPage

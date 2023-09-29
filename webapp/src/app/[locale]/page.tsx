@@ -21,12 +21,12 @@ const Home = (): JSX.Element => {
     >
       <Box
         sx={{
-          width: '65%',
-          height: '50%',
+          width: '45%',
+          height: '30%',
           backgroundColor: '#f5f5f5',
           borderRadius: '16px',
           boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-          textAlign: 'center' // add textAlign property to center the button
+          textAlign: 'center'
         }}
       >
         <h1 style={{ color: '#333', marginLeft: '16px' }}>
@@ -38,8 +38,7 @@ const Home = (): JSX.Element => {
             id='basic-button'
             variant='contained'
             style={{
-              marginTop: '96px',
-              backgroundColor: '#0077b6',
+              marginTop: '60px',
               color: 'white',
               display: 'flex',
               justifyContent: 'center',

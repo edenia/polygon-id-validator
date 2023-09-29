@@ -97,7 +97,7 @@ const EnhancedTableHead = () => {
   )
 }
 
-export default function EnhancedTable() {
+export default function EnhancedTable(): JSX.Element {
   const locale = useLocale()
   const t = useTranslations('CredentialPage')
   const [page, setPage] = React.useState(0)
@@ -116,14 +116,6 @@ export default function EnhancedTable() {
   }
 
   useEffect(() => {
-    if (!data) {
-      return
-    }
-
-    console.log(data)
-  }, [data])
-
-  useEffect(() => {
     loadQuery()
   }, [loadQuery])
 
@@ -131,13 +123,9 @@ export default function EnhancedTable() {
     <Box sx={{ width: '70%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <TableContainer>
-          <Table
-            // sx={{ minWidth: 200 }}
-            aria-labelledby='tableTitle'
-            size={'medium'}
-          >
+          <Table aria-labelledby='tableTitle' size={'medium'}>
             <EnhancedTableHead />
-            {data ? (
+            {data?.request_aggregate.aggregate.count || 0 > 0 ? (
               <TableBody>
                 {data?.request.map((row, index) => {
                   const labelId = `enhanced-table-checkbox-${index}`
