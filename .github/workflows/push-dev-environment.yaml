@@ -35,7 +35,7 @@ jobs:
           NEXT_PUBLIC_TITLE: "Credential Verifier"
           NEXT_PUBLIC_LOGO: "https://raw.githubusercontent.com/edenia/.github/master/.github/workflows/images/edenia-logo.png"
           NEXT_PUBLIC_FOOTER_LINKS: "[]"
-          NEXT_PUBLIC_HASURA_URL: "https://polygonid-verifier.edenia.cloud/v1/graphql"
+          NEXT_PUBLIC_HASURA_URL: "https://polygonid-graphql.edenia.cloud/v1/graphql"
 
       - name: Build kubernetes files
         id: build_kubernetes_files
